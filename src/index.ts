@@ -1,6 +1,7 @@
 /**
  * 入口文件
  */
+type TTimeFormat = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 class ZQDate {
   constructor(public date: Date) {
   }
@@ -42,6 +43,66 @@ class ZQDate {
     })
     return format
   }
+  /**
+   * 克隆一份ZQ时间对象
+   */
+  clone(): ZQDate {
+    return ZDate(this.getTime())
+  }
+  /**
+   * 获取时间戳
+   */
+  getTime(): number {
+    return this.date.getTime()
+  }
+  /**
+   * 时间减法
+   * @param number 减去的数量
+   * @param tFormat 时间类型 year,month,day,hour,minute,second
+   */
+  sub(number: number, tFormat: TTimeFormat): ZQDate {
+    const newDate: ZQDate = this.clone()
+    // 获取时间对象
+    const date = newDate.date
+    if (tFormat === 'day') { // 减去天
+      date.setDate(date.getDate() - number)
+    } else if (tFormat === 'hour') { // 减去小时
+      date.setHours(date.getHours() - number)
+    } else if (tFormat === 'minute') { // 分钟
+      date.setMinutes(date.getMinutes() - number)
+    } else if (tFormat === 'month') { // 月
+      date.setMonth(date.getMonth() - number)
+    } else if (tFormat === 'second') { // 秒
+      date.setSeconds(date.getSeconds() - number)
+    } else if (tFormat === 'year') {
+      date.setFullYear(date.getFullYear() - number)
+    }
+    return newDate
+  }
+  /**
+   * 时间加法
+   * @param number 加上的数量
+   * @param tFormat 时间类型 year,month,day,hour,minute,second
+   */
+  add(number: number, tFormat: TTimeFormat): ZQDate {
+    const newDate: ZQDate = this.clone()
+    // 获取时间对象
+    const date = newDate.date
+    if (tFormat === 'day') { // 减去天
+      date.setDate(date.getDate() + number)
+    } else if (tFormat === 'hour') { // 减去小时
+      date.setHours(date.getHours() + number)
+    } else if (tFormat === 'minute') { // 分钟
+      date.setMinutes(date.getMinutes() + number)
+    } else if (tFormat === 'month') { // 月
+      date.setMonth(date.getMonth() + number)
+    } else if (tFormat === 'second') { // 秒
+      date.setSeconds(date.getSeconds() + number)
+    } else if (tFormat === 'year') {
+      date.setFullYear(date.getFullYear() + number)
+    }
+    return newDate
+  }
 }
 /**
  * 通过当前时间创建Date对象
@@ -61,7 +122,7 @@ export function ZDate(date?: Date | string | number): ZQDate | undefined {
   if (typeof date === 'string') {
     date = date.replace(/\-/g, '/')
   }
-  date = date instanceof Date ? date : new Date(date.toString())
+  date = date instanceof Date ? date : new Date(typeof date === 'number' ? date : date.toString())
   // 如果日期格式错误则
   if (date.toString() === 'Invalid Date') {
     console.error('日期格式错误')
