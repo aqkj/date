@@ -45,3 +45,9 @@ test('时间加法是否成功', () => {
   // 加一年
   expect(ZDate('2020-02-03 01:02:33').add(1, 'year').format('YYYY-MM-DD HH:mm:ss')).toBe('2021-02-03 01:02:33')
 })
+test('计算时间差是否成功', () => {
+  // expect(ZDate('2020-3-16').diff('2020-3-15', 'day')).toBe(1)
+  // expect(ZDate('2020-4-16').diff('2020-3-16', 'month')).toBe(1)
+  // expect(ZDate('2020-4-16').diff('2020-3-15', 'week')).toBe(1)
+  // expect(ZDate('2020-4-16').diff('2020-3-15')).toBe(2764800000)
+})

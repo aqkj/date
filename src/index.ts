@@ -103,6 +103,63 @@ class ZQDate {
     }
     return newDate
   }
+  /**
+   * 时间差
+   * @param date 时间戳
+   * @param format 格式化
+   */
+  diff(date: number, format?: TTimeFormat | 'week'): number
+  /**
+   * 时间差
+   * @param date 时间字符串
+   * @param format 格式化
+   */
+  diff(date: string, format?: TTimeFormat | 'week'): number
+  /**
+   * 时间差
+   * @param date 时间Date对象
+   * @param format 格式化
+   */
+  diff(date: Date, format?: TTimeFormat | 'week'): number
+  /**
+   * 时间差
+   * @param date 时间ZQDate对象
+   * @param format 格式化
+   */
+  diff(date: ZQDate, format?: TTimeFormat | 'week'): number
+  /**
+   * 计算时间差
+   * @param date 
+   */
+  diff(date: number | string | Date | ZQDate, format?: TTimeFormat | 'week'): number {
+    // 类型为字符串
+    if (typeof date === 'string') date = new Date(date.replace(/\-/g, '/')).getTime()
+    // 类型为时间对象
+    else if (date instanceof Date || date instanceof ZQDate) date = date.getTime()
+    let diffTime: number = this.getTime() - date
+    // 判断是否存在format
+    if (format) {
+      if (format === 'day') { // 剩余天数
+        diffTime = diffTime / (24 * 3600 * 1000)
+      } else if (format === 'hour') { // 剩余小时
+        diffTime = diffTime / (3600 * 1000)
+      } else if (format === 'minute') { // 剩余分钟
+        diffTime = diffTime / (60 * 1000)
+      } else if (format === 'month') { // 剩余月
+        diffTime = diffTime / (30 * 24 * 3600 * 1000)
+      } else if (format === 'year') { // 剩余年
+        diffTime = diffTime / (365 * 24 * 3600 * 1000)
+      } else if (format === 'second') {
+        diffTime = diffTime / 1000
+      } else if (format === 'week') {
+        diffTime = diffTime / (7 * 24 * 3600 * 1000)
+      }
+      return Math.round(diffTime * 100) / 100
+    } else {
+      // 返回时间戳时间差
+      return diffTime
+    }
+  }
 }
 /**
  * 通过当前时间创建Date对象

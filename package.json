@@ -1,8 +1,9 @@
 {
   "name": "@aqkj/date",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "方便的时间日期操作工具",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "tsc"

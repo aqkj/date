@@ -34,10 +34,20 @@ ZDate().add(1, 'year').format('YYYY-MM-DD HH:mm:ss.SSS') // 加上一年
 ZDate().add(1, 'hour').format('YYYY-MM-DD HH:mm:ss.SSS') // 加上一小时
 ZDate().add(1, 'minute').format('YYYY-MM-DD HH:mm:ss.SSS') // 加上一分钟
 ZDate().add(1, 'second').format('YYYY-MM-DD HH:mm:ss.SSS') // 加上一秒
+
+/* 时间差 */
+ZDate().diff('2019-10-10') // 计算时间差，返回时间戳
+ZDate().diff('2019-10-10', 'day') // 返回天数差
+ZDate().diff('2019-10-10', 'month') // 返回月份差
+ZDate().diff('2019-10-10', 'year') // 返回年数差
+ZDate().diff('2019-10-10', 'week') // 返回周数差
+ZDate().diff('2019-10-10', 'second') // 返回秒数差
+ZDate().diff('2019-10-10', 'hour') // 返回小时差
+ZDate().diff('2019-10-10', 'minute') // 返回分钟差
 ```
 
 ## Todo
 - [x] 时间格式化
 - [x] 时间加减法
-- [ ] 时差计算
+- [x] 时差计算
 - [ ] 对应时间类型开始和结束时间
