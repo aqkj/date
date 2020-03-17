@@ -3,14 +3,14 @@
  */
 type TTimeFormat = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 class ZQDate {
-  constructor(public date: Date) {
+  constructor(public $date: Date) {
   }
   /**
    * 格式化日期时间
    * @param {string} format 格式
    */
   format(format: string = 'YYYY-MM-DD'): string {
-    const date = this.date
+    const date = this.$date
     const formatObj = {
       // 年
       'Y+': date.getFullYear(),
@@ -53,7 +53,7 @@ class ZQDate {
    * 获取时间戳
    */
   getTime(): number {
-    return this.date.getTime()
+    return this.$date.getTime()
   }
   /**
    * 时间减法
@@ -61,9 +61,8 @@ class ZQDate {
    * @param tFormat 时间类型 year,month,day,hour,minute,second
    */
   sub(number: number, tFormat: TTimeFormat): ZQDate {
-    const newDate: ZQDate = this.clone()
     // 获取时间对象
-    const date = newDate.date
+    const date = this.$date
     if (tFormat === 'day') { // 减去天
       date.setDate(date.getDate() - number)
     } else if (tFormat === 'hour') { // 减去小时
@@ -77,7 +76,7 @@ class ZQDate {
     } else if (tFormat === 'year') {
       date.setFullYear(date.getFullYear() - number)
     }
-    return newDate
+    return this
   }
   /**
    * 时间加法
@@ -85,9 +84,8 @@ class ZQDate {
    * @param tFormat 时间类型 year,month,day,hour,minute,second
    */
   add(number: number, tFormat: TTimeFormat): ZQDate {
-    const newDate: ZQDate = this.clone()
     // 获取时间对象
-    const date = newDate.date
+    const date = this.$date
     if (tFormat === 'day') { // 减去天
       date.setDate(date.getDate() + number)
     } else if (tFormat === 'hour') { // 减去小时
@@ -101,7 +99,7 @@ class ZQDate {
     } else if (tFormat === 'year') {
       date.setFullYear(date.getFullYear() + number)
     }
-    return newDate
+    return this
   }
   /**
    * 时间差
@@ -159,6 +157,236 @@ class ZQDate {
       // 返回时间戳时间差
       return diffTime
     }
+  }
+  /**
+   * 获取小时数量
+   * @param num 
+   */
+  hour(): number
+  /**
+   * 设置小时数量
+   * @param num 
+   */
+  hour(num: number): ZQDate
+  hour(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setHours(num)
+      return this
+    }
+    return this.$date.getHours()
+  }
+  /**
+   * 获取分钟数
+   * @param num 
+   */
+  minute(): number
+  /**
+   * 设置分钟数
+   * @param num 
+   */
+  minute(num: number): ZQDate
+  minute(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setMinutes(num)
+      return this
+    }
+    return this.$date.getMinutes()
+  }
+  /**
+   * 获取秒数
+   * @param num 
+   */
+  second(): number
+  /**
+   * 设置秒数
+   * @param num 
+   */
+  second(num: number): ZQDate
+  second(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setSeconds(num)
+      return this
+    }
+    return this.$date.getSeconds()
+  }
+  /**
+   * 获取毫秒数
+   * @param num 
+   */
+  millisecond(): number
+  /**
+   * 设置毫秒数
+   * @param num 
+   */
+  millisecond(num: number): ZQDate
+  millisecond(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setMilliseconds(num)
+      return this
+    }
+    return this.$date.getMilliseconds()
+  }
+  /**
+   * 获取月数
+   * @param num 
+   */
+  month(): number
+  /**
+   * 设置月数
+   * @param num 
+   */
+  month(num: number): ZQDate
+  month(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setMonth(num)
+      return this
+    }
+    return this.$date.getMonth()
+  }
+  /**
+   * 获取当前日
+   * @param num 
+   */
+  date(): number
+  /**
+   * 设置日数
+   * @param num 
+   */
+  date(num: number): ZQDate
+  date(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setDate(num)
+      return this
+    }
+    return this.$date.getDate()
+  }
+  /**
+   * 获取当前季度
+   * @param num 
+   */
+  quarter(): number
+  /**
+   * 设置季度数
+   * @param num 1-4季度
+   */
+  quarter(num: number): ZQDate
+  quarter(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      // 获取季度开始时间
+      const month: number = (num - 1) * 3
+      this.$date.setMonth(month)
+      return this
+    }
+    return Math.floor(this.month() / 3) + 1
+  }
+  /**
+   * 获取当前年
+   * @param num 
+   */
+  year(): number
+  /**
+   * 设置年数
+   * @param num 
+   */
+  year(num: number): ZQDate
+  year(num?: number): number | ZQDate {
+    if (num !== undefined) {
+      this.$date.setFullYear(num)
+      return this
+    }
+    return this.$date.getFullYear()
+  }
+  /**
+   * 获取当前周几
+   * @param num 
+   */
+  day(): number
+  /**
+   * 设置周几
+   * @param num 0-6，0为周日
+   */
+  day(num: number): ZQDate
+  day(num?: number): number | ZQDate {
+    // 获取当前周几
+    const curDay: number = this.$date.getDay()
+    if (num !== undefined) {
+      if (curDay > num) {
+        // 减去对应天数
+        this.sub(curDay - num, 'day')
+      } else {
+        this.add(num - curDay, 'day')
+      }
+      return this
+    }
+    return curDay
+  }
+  /**
+   * 相对开始时间
+   * @param format 相对类型
+   */
+  startOf(format: TTimeFormat | 'week' | 'quarter') {
+    const action = {
+      day: () => { // 当天最开始的时间
+        this.hour(0).minute(0).second(0).millisecond(0)
+      },
+      hour: () => { // 当前小时最开始的时间
+        this.minute(0).second(0).millisecond(0)
+      },
+      minute: () => { // 当前分钟最开始的时间
+        this.second(0).millisecond(0)
+      },
+      month: () => { // 当前月份最开始的时间
+        this.date(1).hour(0).minute(0).second(0).millisecond(0)
+      },
+      quarter: () => { // 当前季度最开始时间
+        this.quarter(this.quarter()).date(1).hour(0).minute(0).second(0).millisecond(0)
+      },
+      second: () => { // 当前秒最开始的时间
+        this.millisecond(0)
+      },
+      week: () => { // 当前周最开始的时间
+        this.day(0).hour(0).minute(0).second(0).millisecond(0)
+      },
+      year: () => { // 当前年最开始 的时间
+        this.month(0).date(1).hour(0).minute(0).second(0).millisecond(0)
+      }
+    }
+    typeof action[format] === 'function' && action[format]()
+    return this
+  }
+  /**
+   * 相对结束时间
+   * @param format 相对类型
+   */
+  endOf(format: TTimeFormat | 'week' | 'quarter') {
+    const action = {
+      day: () => { // 当前天的结束时间
+        this.hour(23).minute(59).second(59).millisecond(999)
+      },
+      hour: () => { // 当前小时的结束时间
+        this.minute(59).second(59).millisecond(999)
+      },
+      minute: () => { // 当前分钟的结束时间
+        this.second(59).millisecond(999)
+      },
+      month: () => { // 当前月份的结束时间
+        this.month(this.month() + 1).date(0).hour(23).minute(59).second(59).millisecond(999)
+      },
+      quarter: () => { // 当前季度的结束时间
+        this.quarter(this.quarter() + 1).date(0).hour(23).minute(59).second(59).millisecond(999)
+      },
+      second: () => { // 当前秒的结束时间
+        this.millisecond(999)
+      },
+      week: () => { // 当前周的结束时间
+        this.day(6).hour(23).minute(59).second(59).millisecond(999)
+      },
+      year: () => { // 当前年的结束时间
+        this.month(12).date(0).hour(23).minute(59).second(59).millisecond(999)
+      }
+    }
+    typeof action[format] === 'function' && action[format]()
+    return this
   }
 }
 /**

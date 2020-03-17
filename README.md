@@ -44,13 +44,61 @@ ZDate().diff('2019-10-10', 'week') // 返回周数差
 ZDate().diff('2019-10-10', 'second') // 返回秒数差
 ZDate().diff('2019-10-10', 'hour') // 返回小时差
 ZDate().diff('2019-10-10', 'minute') // 返回分钟差
+
+/* 对应时间类型开始时间 */
+ZDate('2020-3-16').startOf('day').format('HH:mm:ss.SSS') // 当前天开始时间
+ZDate('2020-3-16 12:20:30').startOf('hour').format('HH:mm:ss.SSS') // 当前小时开始时间
+ZDate('2020-3-16 12:20:00').startOf('minute').format('HH:mm:ss.SSS') // 当前分钟开始时间
+ZDate('2020-3-16 12:20:00').startOf('month').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前月开始时间
+ZDate('2020-3-16 12:20:00').startOf('quarter').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前季度开始时间
+ZDate('2020-3-16 12:20:00').startOf('second').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前秒开始时间
+ZDate('2020-3-16 12:20:00').startOf('week').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前周开始时间
+ZDate('2020-3-16 12:20:00').startOf('year').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前年开始时间
+
+/* 对应时间类型结束时间 */
+ZDate('2020-3-16').endOf('day').format('HH:mm:ss.SSS') // 当前天结束时间
+ZDate('2020-3-16 12:20:30').endOf('hour').format('HH:mm:ss.SSS') // 当前小时结束时间
+ZDate('2020-3-16 12:20:00').endOf('minute').format('HH:mm:ss.SSS') // 当前分钟结束时间
+ZDate('2020-3-16 12:20:00').endOf('month').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前月结束时间
+ZDate('2020-3-16 12:20:00').endOf('quarter').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前季度结束时间
+ZDate('2020-3-16 12:20:00').endOf('second').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前秒结束时间
+ZDate('2020-3-16 12:20:00').endOf('week').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前周结束时间
+ZDate('2020-3-16 12:20:00').endOf('year').format('YYYY-MM-DD HH:mm:ss.SSS') // 当前年结束时间
+
+/* 获取对应时间类型/设置对应时间类型数值 */
+ZDate('2020-3-16').day() // 获取当前周几
+ZDate('2020-3-16').day(1) // 设置当前周几 0-6
+
+ZDate('2020-3-16 12:20:30').year() // 获取当前几几年
+ZDate('2020-3-16 12:20:30').year(2019) // 设置当前年
+
+ZDate('2020-3-16 12:20:30').quarter() // 获取当前季度
+ZDate('2020-3-16 12:20:30').quarter() // 设置当前季度 1-4
+
+ZDate('2020-3-16 12:20:30').date() // 获取当前几号
+ZDate('2020-3-16 12:20:30').date(30) // 设置当前几号
+
+ZDate('2020-3-16 12:20:30').month() // 获取当前月份
+ZDate('2020-3-16 12:20:30').month(11) // 设置当前月份 0-11
+
+ZDate('2020-3-16 12:20:30').millisecond() // 获取当前毫秒
+ZDate('2020-3-16 12:20:30').millisecond(999) // 设置当前毫秒
+
+ZDate('2020-3-16 12:20:30').second() // 获取当前秒
+ZDate('2020-3-16 12:20:30').second(12) // 设置当前秒
+
+ZDate('2020-3-16 12:20:30').minute() // 获取当前分钟
+ZDate('2020-3-16 12:20:30').minute(12) // 设置当前分钟
+
+ZDate('2020-3-16 12:20:30').hour() // 获取当前小时
+ZDate('2020-3-16 12:20:30').hour(12) // 设置当前小时
 ```
 
 ## Todo
 - [x] 时间格式化
 - [x] 时间加减法
 - [x] 时差计算
-- [ ] 对应时间类型开始和结束时间
+- [x] 对应时间类型开始和结束时间
 - [ ] 判断时间大小/时间相同
 - [ ] 时间间隔/相对时间
-- [ ] 获取对应时间类型/设置对应时间类型数值
+- [x] 获取对应时间类型/设置对应时间类型数值
