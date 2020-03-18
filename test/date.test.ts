@@ -71,3 +71,13 @@ test('对应结束时间是否正确', () => {
   expect(ZDate('2020-3-16 12:20:00').endOf('week').format('YYYY-MM-DD HH:mm:ss.SSS')).toBe('2020-03-21 23:59:59.999')
   expect(ZDate('2020-3-16 12:20:00').endOf('year').format('YYYY-MM-DD HH:mm:ss.SSS')).toBe('2020-12-31 23:59:59.999')
 })
+test('对比对应时间大小是否正确', () => {
+  const date = ZDate('2020-3-16 12:20:30')
+  expect(date.isBefore('2020-03-05')).toBeFalsy()
+  expect(date.isBefore('2020-03-30')).toBeTruthy()
+  expect(date.isAfter('2020/03/04')).toBeTruthy()
+  expect(date.isAfter(new Date('2020/03/20'))).toBeFalsy()
+  expect(date.isAfter(new Date('2020/03/10').getTime())).toBeTruthy()
+  expect(date.isAfter(ZDate(new Date('2020/03/10').getTime()))).toBeTruthy()
+  expect(date.isSame(ZDate(new Date('2020/03/16').getTime()))).toBeFalsy()
+})

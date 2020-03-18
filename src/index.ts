@@ -388,6 +388,36 @@ class ZQDate {
     typeof action[format] === 'function' && action[format]()
     return this
   }
+  /**
+   * 判断是否在指定时间之前
+   * @param date 时间
+   */
+  isBefore(date: Date | string | number | ZQDate): boolean {
+    if (!(date instanceof ZQDate)) {
+      date = ZDate(date as any)
+    }
+    return date ? this.getTime() < date.getTime() : false
+  }
+  /**
+   * 判断是否在指定时间之后
+   * @param date 时间
+   */
+  isAfter(date: Date | string | number | ZQDate): boolean {
+    if (!(date instanceof ZQDate)) {
+      date = ZDate(date as any)
+    }
+    return date ? this.getTime() > date.getTime() : false
+  }
+  /**
+   * 判断是否和指定时间相同
+   * @param date 时间
+   */
+  isSame(date: Date | string | number | ZQDate): boolean {
+    if (!(date instanceof ZQDate)) {
+      date = ZDate(date as any)
+    }
+    return date ? this.getTime() === date.getTime() : false
+  }
 }
 /**
  * 通过当前时间创建Date对象

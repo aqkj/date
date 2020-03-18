@@ -92,6 +92,22 @@ ZDate('2020-3-16 12:20:30').minute(12) // 设置当前分钟
 
 ZDate('2020-3-16 12:20:30').hour() // 获取当前小时
 ZDate('2020-3-16 12:20:30').hour(12) // 设置当前小时
+
+/* 判断时间大小/时间相同 */
+const date = ZDate('2020-3-16 12:20:30')
+ // 判断是否在对应时间之前
+date.isBefore('2020-03-05')
+date.isBefore('2020-03-30')
+// 判断是否在对应时间之后
+date.isAfter('2020/03/04')
+date.isAfter(new Date('2020/03/20'))
+date.isAfter(new Date('2020/03/10').getTime())
+date.isAfter(ZDate(new Date('2020/03/10').getTime()))
+// 判断是否和对应时间相同
+date.isSame(ZDate(new Date('2020/03/16').getTime()))
+date.isSame(new Date('2020/03/16'))
+date.isSame('2020/03/16')
+date.isSame(1584512884678)
 ```
 
 ## Todo
@@ -99,6 +115,6 @@ ZDate('2020-3-16 12:20:30').hour(12) // 设置当前小时
 - [x] 时间加减法
 - [x] 时差计算
 - [x] 对应时间类型开始和结束时间
-- [ ] 判断时间大小/时间相同
+- [x] 判断时间大小/时间相同
 - [ ] 时间间隔/相对时间
 - [x] 获取对应时间类型/设置对应时间类型数值
